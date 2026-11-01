@@ -1,0 +1,864 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE BOY — Personal Archive</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080808;
+    color: #f5f5f5;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: white;
+    color: black;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav {
+    width: 100%;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #aaa;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.menu-btn {
+    display: none;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 150px 8% 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-top {
+    display: flex;
+    justify-content: space-between;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(75px, 15vw, 190px);
+    font-weight: 500;
+    line-height: .85;
+    letter-spacing: -8px;
+}
+
+.hero h1 span {
+    display: block;
+    font-style: italic;
+    color: #777;
+    margin-left: 15%;
+}
+
+.hero-bottom {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.hero-bottom p {
+    max-width: 350px;
+    color: #999;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.explore {
+    border: 1px solid #555;
+    padding: 15px 25px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+
+.explore:hover {
+    background: white;
+    color: black;
+}
+
+.hero-number {
+    position: absolute;
+    right: 8%;
+    top: 42%;
+    font-size: 11px;
+    color: #666;
+    writing-mode: vertical-rl;
+    letter-spacing: 4px;
+}
+
+section {
+    padding: 120px 8%;
+    border-top: 1px solid #222;
+}
+
+.section-label {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 7vw, 85px);
+    font-weight: 500;
+    margin-bottom: 55px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.profile-image {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+.profile-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.profile-text p {
+    color: #999;
+    line-height: 2;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.info-list {
+    border-top: 1px solid #333;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 0;
+    border-bottom: 1px solid #333;
+    font-size: 12px;
+}
+
+.info-item span:first-child {
+    color: #777;
+    letter-spacing: 1px;
+}
+
+.info-item span:last-child {
+    text-align: right;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: #333;
+    border: 1px solid #333;
+}
+
+.detail-card {
+    background: #080808;
+    padding: 40px;
+    min-height: 200px;
+    transition: .3s;
+}
+
+.detail-card:hover {
+    background: #151515;
+}
+
+.detail-card small {
+    color: #777;
+    letter-spacing: 2px;
+    font-size: 10px;
+}
+
+.detail-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.detail-card p {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.gallery-item:nth-child(even) {
+    margin-top: 90px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: .6s;
+}
+
+.gallery-item img:hover {
+    filter: grayscale(0%);
+    transform: scale(.98);
+}
+
+.gallery-item p {
+    margin-top: 15px;
+    color: #999;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.gallery-item span {
+    color: white;
+    margin-right: 12px;
+}
+
+.character {
+    background: #f0f0f0;
+    color: #080808;
+}
+
+.character .section-label {
+    color: #777;
+}
+
+.character-content {
+    max-width: 800px;
+}
+
+.character-content p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(25px, 4vw, 48px);
+    line-height: 1.5;
+}
+
+.character-content span {
+    font-style: italic;
+    color: #777;
+}
+
+.quote {
+    text-align: center;
+    padding: 160px 10%;
+}
+
+.quote h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px, 7vw, 80px);
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.quote p {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 35px;
+}
+
+.secret {
+    text-align: center;
+}
+
+.secret-box {
+    max-width: 450px;
+    margin: auto;
+    padding: 45px;
+    border: 1px solid #333;
+}
+
+.secret-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.secret-box p {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.secret-box input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #444;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.secret-box button {
+    width: 100%;
+    padding: 15px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-size: 10px;
+}
+
+#secretMessage {
+    display: none;
+    margin-top: 25px;
+    color: #ddd;
+    line-height: 2;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+
+footer {
+    padding: 35px 8%;
+    border-top: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: .9s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media(max-width: 768px) {
+
+    nav {
+        padding: 20px 6%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #080808;
+        flex-direction: column;
+        padding: 30px 7%;
+        border-bottom: 1px solid #333;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .hero {
+        padding: 150px 7% 70px;
+    }
+
+    .hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .hero-bottom {
+        flex-direction: column;
+        align-items: start;
+        gap: 30px;
+    }
+
+    .hero-number {
+        display: none;
+    }
+
+    section {
+        padding: 90px 7%;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .profile-image {
+        height: 420px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-card {
+        padding: 30px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .gallery-item:nth-child(even) {
+        margin-top: 0;
+    }
+
+    .gallery-item img {
+        height: 400px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">THE BOY.</div>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#home" onclick="closeMenu()">BERANDA</a>
+        <a href="#profile" onclick="closeMenu()">PROFIL</a>
+        <a href="#details" onclick="closeMenu()">DETAIL</a>
+        <a href="#collection" onclick="closeMenu()">KOLEKSI</a>
+        <a href="#secret" onclick="closeMenu()">SECRET</a>
+    </div>
+</nav>
+
+<div class="hero" id="home">
+
+    <div class="hero-top">
+        <span>By.Claudya</span>
+        <span>EST. 2026</span>
+    </div>
+
+    <h1>
+        THE
+        <span>BOY.</span>
+    </h1>
+
+    <div class="hero-number">
+        A SPECIAL COLLECTION 001
+    </div>
+
+    <div class="hero-bottom">
+        <p>
+            Tempat kecil yang aku buat khusus buat kamu. 
+            Isinya tentang kamu, hal-hal kecil yang aku suka, kebiasaan unikmu, 
+            dan beberapa hal yang mungkin belum pernah aku ceritain.
+            Anggap aja ini sedikit ruang buat kamu melihat dirimu
+            dari sudut pandang aku.
+        </p>
+
+        <a href="#profile" class="explore">
+            SEE MORE ABOUT HIM ↗
+        </a>
+    </div>
+
+</div>
+
+<!-- PROFILE -->
+
+<section id="profile">
+
+    <div class="section-label reveal">
+        01 / IDENTIFICATION
+    </div>
+
+    <h2 class="section-title reveal">
+        SEE MORE ABOUT HIM.
+    </h2>
+
+    <div class="profile-grid">
+
+        <img
+            src="foto4.jpeg"
+            alt="Foto profil"
+            class="profile-image reveal"
+        >
+
+        <div class="profile-text reveal">
+
+            <h3>MUCH.ABIDZAR AL GHIFARI</h3>
+
+            <p>
+                Orang yang tingkahnya kadang suka nggak ketebak, random, 
+                dan selalu punya cara sendiri buat bikin aku ketawa.
+                 Kadang suka bertingkah aneh, kadang juga manja banget.
+                  Tapi justru hal-hal kecil kayak gitu yang bikin dia 
+                  jadi seseorang yang spesial buat aku.
+
+            </p>
+
+            <div class="info-list">
+
+                <div class="info-item">
+                    <span>NAMA</span>
+                    <span>Much. Abidzar Al Ghifari</span>
+                </div>
+
+                <div class="info-item">
+                    <span>PANGGILAN</span>
+                    <span>abiiii</span>
+                </div>
+
+                <div class="info-item">
+                    <span>TANGGAL LAHIR</span>
+                    <span>09  Juli 2007</span>
+                </div>
+
+                <div class="info-item">
+                    <span>KEPRIBADIAN</span>
+                    <span>Ceria, ekspresif, sedikit jahil, dan punya banyak tingkah. Kadang bisa serius, tapi lebih sering menunjukkan sisi konyolnya</span>
+                </div>
+
+                <div class="info-item">
+                    <span>STATUS</span>
+                    <span>Someone's Favorite.</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DETAILS -->
+
+<section id="details">
+
+    <div class="section-label reveal">
+        02 / PERSONAL DETAILS
+    </div>
+
+    <h2 class="section-title reveal">
+        Hal-Hal Kecil Tentangnya.
+    </h2>
+
+    <div class="details-grid">
+
+        <div class="detail-card reveal">
+            <small>01 — FAVORITES</small>
+            <h3>Hal Favorit</h3>
+            <p>
+                Mulai dari makanan yang dia suka, 
+                hal yang sering dia lakukan,
+                 sampai hal-hal sederhana yang bisa bikin mood nya jadi lebih baik.
+
+            </p>
+        </div>
+
+        <div class="detail-card reveal">
+            <small>02 — HABITS</small>
+            <h3>Kebiasaannya</h3>
+            <p>
+                Suka tidur cepat,
+                 manjanya kadang nggak ketulungan,
+                  dan selalu punya tingkah random yang berhasil bikin aku ketawa. 
+                  Hal-hal sederhana dari dia yang justru bikin aku makin sayang.
+
+            </p>
+        </div>
+
+        <div class="detail-card reveal">
+            <small>03 — PERSONALITY</small>
+            <h3>Kepribadian</h3>
+            <p>
+                Orangnya ceria, suka bercanda, kadang jahil,
+                 dan punya banyak tingkah. Di balik kelakuannya yang konyol,
+                  dia juga punya sisi lembut yang bikin aku nyaman.
+
+            </p>
+        </div>
+
+        <div class="detail-card reveal">
+            <small>04 — LITTLE THINGS</small>
+            <h3>Hal Unik</h3>
+            <p>
+                Entah kenapa, hal-hal sederhana yang dia lakukan selalu punya cara tersendiri 
+                buat bikin aku senyum. Bahkan saat dia nggak sedang berusaha melucu.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- COLLECTION -->
+
+<section id="collection">
+
+    <div class="section-label reveal">
+        03 / VISUAL COLLECTION
+    </div>
+
+    <h2 class="section-title reveal">
+        The Collection.
+    </h2>
+
+    <div class="gallery">
+
+        <div class="gallery-item reveal">
+            <img src="abi2.jpeg" alt="Collection 01">
+            <p><span>01.</span> THE PORTRAIT</p>
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="abi.jpeg" alt="Collection 02">
+            <p><span>02.</span> ANOTHER SIDE</p>
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="abi4.jpeg" alt="Collection 03">
+            <p><span>03.</span> UNFILTERED MOMENT</p>
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="abi3.jpeg" alt="Collection 04">
+            <p><span>04.</span> THE FAVORITE ONE</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CHARACTER -->
+
+<section class="character">
+
+    <div class="section-label reveal">
+        04 / BEHIND THE CHARACTER
+    </div>
+
+    <h2 class="section-title reveal">
+        Lebih Dari Sekadar Foto.
+    </h2>
+
+    <div class="character-content reveal">
+
+        <p>
+            Mungkin dia nggak selalu sadar, tapi ada banyak hal dari dirinya yang aku suka. 
+            Cara dia memperlakukan aku, tingkahnya yang kadang bikin gemas,
+             sampai hal-hal sederhana yang selalu berhasil bikin aku bahagia. 
+             Buat aku, 
+            <span>dia punya banyak sisi yang selalu menarik untuk dikenal.</span>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- QUOTE -->
+
+<div class="quote reveal">
+
+    <h2>
+        Kalau lelah istirahat, jangan menyerah... kecuali disuruh diet.
+    </h2>
+
+    <p>Abidzar-2026</p>
+
+</div>
+
+<!-- SECRET -->
+
+<section id="secret" class="secret">
+
+    <div class="section-label reveal">
+        05 / RESTRICTED ACCESS
+    </div>
+
+    <h2 class="section-title reveal">
+        A Private Space.
+    </h2>
+
+    <div class="secret-box reveal">
+
+        <h3>Area Rahasia.</h3>
+
+        <p>
+            Ada sesuatu yang aku simpan di sini.
+            Masukkan kata sandi untuk membukanya.
+        </p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Masukkan password..."
+        >
+
+        <button onclick="checkPassword()">
+            BUKA AKSES
+        </button>
+
+        <div id="secretMessage">
+            Hai, manusia favoritku.
+
+            <br><br>
+
+            kalau proses kamu ga semulus laki laki lain di luar sana
+            it's okayy sama sekali  ga ada masalah, percaya semua bakal di bayar tuntas,
+            kalau kamu ikhlas ngejalanin hidup kamu, aku support kamu sampe berhasil ya.
+            apapun keadaan kamu di luar sana tolong jadikan aku tempat pulang ternyaman kamu, 
+            karena aku mau kamu selalu inget bahwa masih ada satu perempuan yang selalu
+            bersedia dan siap mendengarkan semua keluh kesah kamu disaat dunia menghakimimu
+
+            <br><br>
+
+            Jangan lupa bahagia, ya.
+            I'm always rooting for you. ♡
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <span>THE BOY. — PERSONAL ARCHIVE</span>
+
+    <span>BY. CLAUDYA V. © 2026</span>
+
+</footer>
+
+<script>
+
+// MENU MOBILE
+
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("show");
+}
+
+function closeMenu() {
+    document.getElementById("navLinks").classList.remove("show");
+}
+
+// ANIMASI SCROLL
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
+
+    });
+
+}, {
+    threshold: 0.12
+});
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
+
+// PASSWORD SECRET
+
+function checkPassword() {
+
+    const password = document.getElementById("password").value;
+
+    // GANTI PASSWORD DI SINI
+    const correctPassword = "abibauee";
+
+    if (password === correctPassword) {
+
+        document.getElementById("secretMessage").style.display = "block";
+
+    } else {
+
+        alert("Password salah! Coba lagi ya.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
